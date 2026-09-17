@@ -1,33 +1,47 @@
 package com.myvouchers.myvouchers.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import com.myvouchers.myvouchers.model.Voucher;
+
 import com.myvouchers.myvouchers.repos.VoucherRepo;
 
-
-
 @RestController
+
 @RequestMapping("/voucherapi")
+
 public class VoucherRestController {
-    
-    @Autowired 
+
+    @Autowired
+
     VoucherRepo repo;
+
     @PostMapping("/vouchers")
+
     public Voucher Create(@RequestBody Voucher voucher) {
-        
+
         return repo.save(voucher);
+
     }
+
     @GetMapping("/vouchers/{code}")
+
     public Voucher getVoucher(@PathVariable("code") String code) {
+
         return repo.findByCode(code);
+
     }
-    
-    
+
 }
